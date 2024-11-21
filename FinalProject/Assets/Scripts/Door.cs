@@ -4,42 +4,91 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    public Transform door; // Reference to the door
-    public Vector3 openPosition; // Position the door moves to when open
-    public float openSpeed = 2f; // Speed of the door opening
+    public bool IsOpen = false;
+    [SerializeField]
+    private float Speed = 1f;
+    [Header("Sliding Configs")]
+    [SerializeField]
+    private Vector3 SlideDirection = Vector3.back;
+    [SerializeField]
+    private float SlideAmount = 2f;
 
-    private Vector3 closedPosition; // Position of the door when closed
-    private bool isOpening = false;
+    private Vector3 StartPosition;
 
-    void Start()
+    private Coroutine AnimationCoroutine;
+
+    private void Awake()
     {
-        // Store the initial position of the door
-        if (door != null)
+        
+      
+       
+        StartPosition = transform.position;
+    }
+
+    public void Open(Vector3 UserPosition)
+    {
+        if (!IsOpen)
         {
-            closedPosition = door.position;
+            if (AnimationCoroutine != null)
+            {
+                StopCoroutine(AnimationCoroutine);
+            }
+
+            
+            
+                AnimationCoroutine = StartCoroutine(DoSlidingOpen());
+            
         }
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        // Check if the object entering the trigger is tagged as "Enemy"
-        if (other.CompareTag("Enemy") && !isOpening)
-        {
-            isOpening = true;
-            StartCoroutine(OpenDoor());
-        }
-    }
+ 
 
-    private IEnumerator OpenDoor()
+    private IEnumerator DoSlidingOpen()
     {
-        // Smoothly move the door to the open position
-        float elapsedTime = 0f;
-        while (elapsedTime < 1f)
+        Vector3 endPosition = StartPosition + SlideAmount * SlideDirection;
+        Vector3 startPosition = transform.position;
+
+        float time = 0;
+        IsOpen = true;
+        while (time < 1)
         {
-            door.position = Vector3.Lerp(closedPosition, openPosition, elapsedTime);
-            elapsedTime += Time.deltaTime * openSpeed;
+            transform.position = Vector3.Lerp(startPosition, endPosition, time);
             yield return null;
+            time += Time.deltaTime * Speed;
         }
-        door.position = openPosition; // Ensure it reaches the exact open position
+    }
+
+    public void Close()
+    {
+        if (IsOpen)
+        {
+            if (AnimationCoroutine != null)
+            {
+                StopCoroutine(AnimationCoroutine);
+            }
+
+            
+            
+                AnimationCoroutine = StartCoroutine(DoSlidingClose());
+            
+        }
+    }
+
+
+
+    private IEnumerator DoSlidingClose()
+    {
+        Vector3 endPosition = StartPosition;
+        Vector3 startPosition = transform.position;
+        float time = 0;
+
+        IsOpen = false;
+
+        while (time < 1)
+        {
+            transform.position = Vector3.Lerp(startPosition, endPosition, time);
+            yield return null;
+            time += Time.deltaTime * Speed;
+        }
     }
 }

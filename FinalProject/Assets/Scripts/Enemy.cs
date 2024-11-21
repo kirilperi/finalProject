@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         enemyAgent = GetComponent<NavMeshAgent>();
+        GameEngine.enemyList.Add(this.gameObject);
         
 
     }
