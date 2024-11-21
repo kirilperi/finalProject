@@ -1052,7 +1052,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03d3040ed319efc4497030f1f88d5452, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraTurn: {fileID: 963194228}
+  cameraTurn: {fileID: 963194225}
   lookSpeed: 200
   groundLayerMask:
     serializedVersion: 2
