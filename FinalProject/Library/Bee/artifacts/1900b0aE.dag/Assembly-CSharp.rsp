@@ -358,9 +358,12 @@
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.41f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 "Assets/Sci Fi Assets/PostProcessing/Utilities/CustomMotionTexture/ExampleWheelController.cs"
 "Assets/Scripts/Door.cs"
+"Assets/Scripts/DoorTrigger.cs"
 "Assets/Scripts/Enemy.cs"
 "Assets/Scripts/GameEngine.cs"
 "Assets/Scripts/PlayerController.cs"
+"Assets/Scripts/Turret Lvl1.cs"
+"Assets/Scripts/Turret.cs"
 -langversion:9.0
 /deterministic
 /optimize+
