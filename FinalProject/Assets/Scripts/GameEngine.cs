@@ -54,7 +54,7 @@ public class GameEngine : MonoBehaviour
         if(!gameRuning)
         {
             GameObject[] spawnPoints = GameObject.FindGameObjectsWithTag("Spawn");
-            float enemyCount = 20 + wave * 1.5f * 20;
+            int enemyCount = Mathf.FloorToInt(20 + wave * 1.5f * 20);
             for(int i=0;i<enemyCount;i++)
             {
                 int randomSpawn = Random.Range(0, spawnPoints.Length);
