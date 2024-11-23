@@ -62,6 +62,10 @@ public class PlayerController : MonoBehaviour
 
     void Movement()
     {
+        if (!HealthBar.Instance.isAlive)
+        {
+            return;
+        }
         moveX = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
         moveZ = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
         locarDirection = transform.forward * moveZ + transform.right * moveX;
