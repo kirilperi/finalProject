@@ -362,8 +362,11 @@
 "Assets/Scripts/Enemy.cs"
 "Assets/Scripts/GameEngine.cs"
 "Assets/Scripts/PlayerController.cs"
-"Assets/Scripts/Turret Lvl1.cs"
-"Assets/Scripts/Turret.cs"
+"Assets/Scripts/ShopAndTurret/Bullet.cs"
+"Assets/Scripts/ShopAndTurret/RotatTurret.cs"
+"Assets/Scripts/ShopAndTurret/Shop.cs"
+"Assets/Scripts/ShopAndTurret/Turret Lvl1.cs"
+"Assets/Scripts/ShopAndTurret/Turret.cs"
 -langversion:9.0
 /deterministic
 /optimize+
