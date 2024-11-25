@@ -9,7 +9,8 @@ public class DoorTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent<Rigidbody>(out Rigidbody rb))
+        //if (other.TryGetComponent<Rigidbody>(out Rigidbody rb))
+        if(other.CompareTag("Enemy"))
         {
             if (!Door.IsOpen)
             {
@@ -20,7 +21,8 @@ public class DoorTrigger : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.TryGetComponent<Rigidbody>(out Rigidbody rb))
+        //if (other.TryGetComponent<Rigidbody>(out Rigidbody rb))
+        if (other.CompareTag("Enemy"))
         {
             if (Door.IsOpen)
             {

@@ -7,7 +7,13 @@ public class Enemy : MonoBehaviour
 {
     NavMeshAgent enemyAgent;
     GameObject target;
-    // Start is called before the first frame update
+    GameObject player ;
+
+
+    private void Awake()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
     void Start()
     {
         enemyAgent = GetComponent<NavMeshAgent>();
@@ -19,7 +25,8 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        SetTarget();
+        //SetTarget();
+        enemyAgent.destination = player.transform.position;
     }
 
     void SetTarget()

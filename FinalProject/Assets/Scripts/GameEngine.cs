@@ -4,70 +4,77 @@ using UnityEngine;
 
 public class GameEngine : MonoBehaviour
 {
-    public GameObject capsuleEnemyPrefab;
-    int wave;
-    bool gameRuning;
-    
+    public List<GameObject> EnemyPrefabs;
+    private int wave;
+    private bool gameRunning;
+
     public static List<GameObject> enemyList = new List<GameObject>();
-    
+
     void Start()
     {
         // Lock the cursor to the center of the screen
         Cursor.lockState = CursorLockMode.Locked;
-
-        // Make the cursor invisible
-        Cursor.visible = false;
+        Cursor.visible = false; // Make the cursor invisible
 
         wave = 0;
-        gameRuning = false;
-        
+        gameRunning = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        MouseLockControll();
-        SpawnManager();
+        MouseLockControl();
+
+        // Start spawning if not already running and no enemies exist
+        if (!gameRunning && enemyList.Count == 0)
+        {
+            StartCoroutine(SpawnManager());
+        }
     }
 
-    void MouseLockControll()
+    void MouseLockControl()
     {
-        // Unlock and show the cursor if the Escape key is pressed (optional)
+        // Toggle cursor lock state with Escape and L keys
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
 
-        // Relock and hide the cursor if the L key is pressed (optional)
         if (Input.GetKeyDown(KeyCode.L))
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
-
     }
 
-
-    void SpawnManager()
+    private IEnumerator SpawnManager()
     {
-        if(!gameRuning)
+        gameRunning = true;
+
+        // Find all spawn points tagged "Spawn"
+        GameObject[] spawnPoints = GameObject.FindGameObjectsWithTag("Spawn");
+        int enemyCount = Mathf.FloorToInt(20 + wave * 1.5f * 20);
+
+        // Spawn enemies at random points
+        for (int i = 0; i < enemyCount; i++)
         {
-            GameObject[] spawnPoints = GameObject.FindGameObjectsWithTag("Spawn");
-            float enemyCount = 20 + wave * 1.5f * 20;
-            for(int i=0;i<enemyCount;i++)
-            {
-                int randomSpawn = Random.Range(0, spawnPoints.Length);
-                Instantiate(capsuleEnemyPrefab, spawnPoints[randomSpawn].transform);
-            }
-            gameRuning = true;
-            
+            int randomSpawn = Random.Range(0, spawnPoints.Length);
+            int randomEnemy = Random.Range(0, EnemyPrefabs.Count);
+
+            // Instantiate enemy at the chosen spawn point
+            Instantiate(EnemyPrefabs[randomEnemy], spawnPoints[randomSpawn].transform.position, Quaternion.identity);
+
+            yield return new WaitForSeconds(0.3f); // Delay between spawns
         }
 
-        if(enemyList.Count==0)
+        wave++; // Increment the wave number
+
+        // Wait until all enemies are defeated
+        while (enemyList.Count > 0)
         {
-            gameRuning = false;
+            yield return null; // Wait until the next frame to check again
         }
-        
+
+        gameRunning = false; // Allow next wave to start
     }
 }
