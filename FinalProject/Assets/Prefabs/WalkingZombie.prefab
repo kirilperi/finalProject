@@ -1757,7 +1757,7 @@ GameObject:
   - component: {fileID: 2096329099818298007}
   - component: {fileID: 1641364065833981006}
   - component: {fileID: 5428630989917698992}
-  - component: {fileID: 2741602691488011252}
+  - component: {fileID: 1838088431663453686}
   m_Layer: 6
   m_Name: WalkingZombie
   m_TagString: Enemy
@@ -1861,7 +1861,7 @@ CapsuleCollider:
   m_Height: 2.3630562
   m_Direction: 1
   m_Center: {x: 0.00000023841858, y: 0.6815281, z: 0}
---- !u!114 &2741602691488011252
+--- !u!114 &1838088431663453686
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1870,12 +1870,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 5734889720116825790}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2ed895b189f1234aa69d365182985fa, type: 3}
+  m_Script: {fileID: 11500000, guid: 410d8ceea73e1e44095df6a28f76f824, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyType: 1
   damage: 20
   attackingDistance: 2
   walkingSpeed: 2
+  runningSpeed: 3
 --- !u!1 &5744672187786662820
 GameObject:
   m_ObjectHideFlags: 0

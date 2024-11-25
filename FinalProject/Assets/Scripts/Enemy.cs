@@ -1,51 +1,116 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+
+public enum EnemyType
+{
+    Zombie1,
+    Zombie2,
+}
+
 public class Enemy : MonoBehaviour
 {
-    NavMeshAgent enemyAgent;
-    GameObject target;
-    GameObject player ;
 
+    [SerializeField] private EnemyType enemyType;
 
-    private void Awake()
+    [SerializeField] private int damage;
+    [SerializeField] private float attackingDistance = 2;
+    [SerializeField] private float walkingSpeed = 2;
+    [SerializeField] private float runningSpeed = 3;
+
+    public bool IsDead { get; private set; }
+
+    private Animator _animator;
+    private NavMeshAgent _agent;
+    private Transform _player;
+
+    private enum AnimationName
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        Idle,
+        Walk,
+        Run,
+        Attack,
+        Dead
     }
-    void Start()
+
+    private void Start()
     {
-        enemyAgent = GetComponent<NavMeshAgent>();
-        GameEngine.enemyList.Add(this.gameObject);
-        
+        _animator = GetComponent<Animator>();
+        _agent = GetComponent<NavMeshAgent>();
+        _player = GameObject.FindGameObjectWithTag("Player").transform;
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //SetTarget();
-        enemyAgent.destination = player.transform.position;
-    }
-
-    void SetTarget()
-    {
-        GameObject closest = null;
-        float closestDistance = Mathf.Infinity;
-        GameObject[] targets = GameObject.FindGameObjectsWithTag("Target");
-
-        foreach (GameObject target in targets)
+        if (enemyType == EnemyType.Zombie2)
         {
-            if (target == null) continue; // Skip null objects
-
-            float distance = Vector3.Distance(transform.position, target.transform.position);
-            if (distance < closestDistance)
-            {
-                closestDistance = distance;
-                closest = target;
-            }
+            _agent.speed = runningSpeed;
         }
-        enemyAgent.destination = closest.transform.position;
+        else
+        {
+            _agent.speed = walkingSpeed;
+        }
+    }
+
+    private void ActivateAnimationClip(AnimationName animationName)
+    {
+        _animator.SetBool(AnimationName.Idle.ToString(), false);
+        _animator.SetBool(AnimationName.Walk.ToString(), false);
+        _animator.SetBool(AnimationName.Run.ToString(), false);
+        _animator.SetBool(AnimationName.Attack.ToString(), false);
+
+        _animator.SetBool(animationName.ToString(), true);
+
+    }
+
+    public void DamagePlayer()
+    {
+        HealthBar.Instance.TakeDamage(damage);
+    }
+
+    public void Dead()
+    {
+        if (!IsDead)
+        {
+            _animator.SetTrigger(AnimationName.Dead.ToString());
+        }
+
+        IsDead = true;
+    }
+
+
+    private void LateUpdate()
+    {
+        if (IsDead)
+        {
+            _agent.enabled = false;
+            return;
+        }
+
+        if (!HealthBar.Instance.isAlive)
+        {
+            _agent.updatePosition = false;
+            ActivateAnimationClip(AnimationName.Idle);
+            return;
+        }
+        var distance = Vector3.Distance(transform.position, _player.position);
+
+        _agent.SetDestination(_player.position);
+
+         if (enemyType == EnemyType.Zombie2 && distance >= attackingDistance)
+        {
+            ActivateAnimationClip(AnimationName.Run);
+            _agent.speed = runningSpeed;
+        }
+        else if(enemyType == EnemyType.Zombie1 && distance >= attackingDistance)
+        {
+            ActivateAnimationClip(AnimationName.Walk);
+            _agent.speed = walkingSpeed;
+        }
+         else
+        {
+            ActivateAnimationClip(AnimationName.Attack);
+        }
+
     }
 }
