@@ -8,7 +8,9 @@ public class TurretLvl1 : MonoBehaviour
     public Vector2Int GredSize = new Vector2Int(10, 10);
     private Turret[,] grid;
     private Turret buildTurret;
-    private Camera mainCa; 
+    private Camera mainCa;
+
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -31,11 +33,19 @@ public class TurretLvl1 : MonoBehaviour
                 int x = Mathf.RoundToInt(worldPosition.x);
                 int y = Mathf.RoundToInt(worldPosition.z);
 
-                buildTurret.transform.position = new Vector3(x, 0, y);
+                bool available = true;
+                if(x<0 || x > GredSize.x - buildTurret.size.x) available = false;
+                if(y < 0 || y > GredSize.y - buildTurret.size.y) available = true;
 
-                if (Input.GetMouseButton(0))
+
+
+                buildTurret.transform.position = new Vector3(x, 0, y);
+                buildTurret.SetTransparent(available);
+
+                if (available && Input.GetMouseButton(0))
                 {
-                    buildTurret=null;
+                    buildTurret.SetNormal();
+                    buildTurret =null;
                 }
             }
         }

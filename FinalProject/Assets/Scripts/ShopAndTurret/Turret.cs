@@ -5,6 +5,8 @@ using UnityEngine;
 public class Turret : MonoBehaviour
 {
     public Vector2Int size = Vector2Int.one;
+    public Renderer mainRenderer;
+
 
     // Start is called before the first frame update
     void Start()
@@ -27,5 +29,22 @@ public class Turret : MonoBehaviour
                 Gizmos.DrawCube(transform.position + new Vector3(x, 0, y), new Vector3(1,1f,1));
             }
         }
+    }
+
+    public void SetTransparent(bool aveilable)
+    {
+        if (aveilable)
+        {
+            mainRenderer.material.color = Color.green;
+        }
+        else
+        {
+            mainRenderer.material.color = Color.red;
+        }
+
+    }
+    public void SetNormal()
+    {
+        mainRenderer.material.color =  Color.white;
     }
 }
