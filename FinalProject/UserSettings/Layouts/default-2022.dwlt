@@ -19,7 +19,11 @@ MonoBehaviour:
     width: 1536
     height: 868.8
   m_ShowMode: 4
+<<<<<<< Updated upstream
   m_Title: Hierarchy
+=======
+  m_Title: Project
+>>>>>>> Stashed changes
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -48,7 +52,11 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
+<<<<<<< Updated upstream
   controlID: 48
+=======
+  controlID: 103
+>>>>>>> Stashed changes
   draggingID: 0
 --- !u!114 &3
 MonoBehaviour:
@@ -122,9 +130,15 @@ MonoBehaviour:
     y: 478.4
     width: 1109.6
     height: 340.4
+<<<<<<< Updated upstream
   m_MinSize: {x: 101, y: 121}
   m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 22}
+=======
+  m_MinSize: {x: 231, y: 271}
+  m_MaxSize: {x: 10001, y: 10021}
+  m_ActualView: {fileID: 17}
+>>>>>>> Stashed changes
   m_Panes:
   - {fileID: 17}
   - {fileID: 22}
@@ -226,7 +240,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 49
+  controlID: 59
   draggingID: 0
 --- !u!114 &10
 MonoBehaviour:
@@ -971,9 +985,15 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
+<<<<<<< Updated upstream
       m_SelectedIDs: 
       m_LastClickedID: 0
       m_ExpandedIDs: 240effff20bdffffe2920000
+=======
+      m_SelectedIDs: 9a4a0000
+      m_LastClickedID: 0
+      m_ExpandedIDs: 4eb8ffffccb8ffff20bdffffe2920000
+>>>>>>> Stashed changes
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: ShopPanel
@@ -1452,14 +1472,20 @@ MonoBehaviour:
   m_OverrideSceneCullingMask: 6917529027641081856
   m_SceneIsLit: 1
   m_SceneLighting: 1
-  m_2DMode: 0
+  m_2DMode: 1
   m_isRotationLocked: 0
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
+<<<<<<< Updated upstream
     m_Target: {x: 329.30002, y: 217.81541, z: -153.88913}
     speed: 2
     m_Value: {x: 329.30002, y: 217.81541, z: -153.88913}
+=======
+    m_Target: {x: 343.2968, y: 231.16881, z: -13.778595}
+    speed: 2
+    m_Value: {x: 343.2968, y: 231.16881, z: -13.778595}
+>>>>>>> Stashed changes
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1487,15 +1513,15 @@ MonoBehaviour:
       m_Size: {x: 0, y: 0}
     yGrid:
       m_Fade:
-        m_Target: 1
+        m_Target: 0
         speed: 2
-        m_Value: 1
+        m_Value: 0
       m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 0.4}
       m_Pivot: {x: 0, y: 0, z: 0}
       m_Size: {x: 1, y: 1}
     zGrid:
       m_Fade:
-        m_Target: 0
+        m_Target: 1
         speed: 2
         m_Value: 1
       m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 0.4}
@@ -1505,6 +1531,7 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
+<<<<<<< Updated upstream
     m_Target: {x: 0.013210218, y: -0.017705597, z: 0.00023510211, w: 0.9998963}
     speed: 2
     m_Value: {x: 0.013208362, y: -0.017703108, z: 0.00023506908, w: 0.99975604}
@@ -1512,10 +1539,19 @@ MonoBehaviour:
     m_Target: 236.89772
     speed: 2
     m_Value: 236.89772
-  m_Ortho:
-    m_Target: 0
+=======
+    m_Target: {x: 0, y: 0, z: 0, w: 1}
     speed: 2
-    m_Value: 0
+    m_Value: {x: 0, y: 0, z: 0, w: 1}
+  m_Size:
+    m_Target: 300.567
+    speed: 2
+    m_Value: 300.567
+>>>>>>> Stashed changes
+  m_Ortho:
+    m_Target: 1
+    speed: 2
+    m_Value: 1
   m_CameraSettings:
     m_Speed: 1.0005001
     m_SpeedNormalized: 0.50000006
@@ -1529,7 +1565,11 @@ MonoBehaviour:
     m_FarClip: 10000
     m_DynamicClip: 1
     m_OcclusionCulling: 0
+<<<<<<< Updated upstream
   m_LastSceneViewRotation: {x: 0.013210218, y: -0.017705597, z: 0.00023510211, w: 0.9998963}
+=======
+  m_LastSceneViewRotation: {x: 0.13769941, y: -0.21772076, z: 0.031053621, w: 0.9658928}
+>>>>>>> Stashed changes
   m_LastSceneViewOrtho: 0
   m_ReplacementShader: {fileID: 0}
   m_ReplacementString: 
