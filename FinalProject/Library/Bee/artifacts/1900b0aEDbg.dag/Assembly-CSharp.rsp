@@ -386,12 +386,15 @@
 "Assets/Scripts/GameEngine.cs"
 "Assets/Scripts/HealthBar.cs"
 "Assets/Scripts/PlayerController.cs"
+"Assets/Scripts/RunningZombieEnemy.cs"
 "Assets/Scripts/ShopAndTurret/Bullet.cs"
 "Assets/Scripts/ShopAndTurret/RotatTurret.cs"
 "Assets/Scripts/ShopAndTurret/Shop.cs"
 "Assets/Scripts/ShopAndTurret/Turret Lvl1.cs"
 "Assets/Scripts/ShopAndTurret/Turret.cs"
 "Assets/Scripts/Wepon.cs"
+"Assets/Scripts/WlakingZombieEnemy.cs"
+"Assets/Scripts/ZombieEnemy.cs"
 -langversion:9.0
 /deterministic
 /optimize-

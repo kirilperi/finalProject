@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-
 public enum EnemyType
 {
     Zombie1,
@@ -13,7 +12,6 @@ public enum EnemyType
 
 public class Enemy : MonoBehaviour
 {
-
     [SerializeField] private EnemyType enemyType;
 
     [SerializeField] private int damage;
@@ -42,75 +40,75 @@ public class Enemy : MonoBehaviour
         _agent = GetComponent<NavMeshAgent>();
         _player = GameObject.FindGameObjectWithTag("Player").transform;
 
-        if (enemyType == EnemyType.Zombie2)
-        {
-            _agent.speed = runningSpeed;
-        }
-        else
-        {
-            _agent.speed = walkingSpeed;
-        }
+        // Set movement speed based on type
+        _agent.speed = (enemyType == EnemyType.Zombie2) ? runningSpeed : walkingSpeed;
     }
 
     private void ActivateAnimationClip(AnimationName animationName)
     {
+        if (IsDead) return; // Prevent animation changes after death
+
         _animator.SetBool(AnimationName.Idle.ToString(), false);
         _animator.SetBool(AnimationName.Walk.ToString(), false);
         _animator.SetBool(AnimationName.Run.ToString(), false);
         _animator.SetBool(AnimationName.Attack.ToString(), false);
 
         _animator.SetBool(animationName.ToString(), true);
-
     }
 
     public void DamagePlayer()
     {
-        HealthBar.Instance.TakeDamage(damage);
+        if (!IsDead)
+        {
+            HealthBar.Instance.TakeDamage(damage);
+        }
     }
 
     public void Dead()
     {
-        if (!IsDead)
-        {
-            _animator.SetTrigger(AnimationName.Dead.ToString());
-        }
+        if (IsDead) return; // Avoid multiple calls to Dead()
 
+        _animator.SetTrigger(AnimationName.Dead.ToString());
         IsDead = true;
+        _agent.enabled = false; // Disable movement after death
+        Destroy(gameObject, 2f); // Optional: Destroy the object after a delay
     }
-
 
     private void LateUpdate()
     {
         if (IsDead)
         {
-            _agent.enabled = false;
-            return;
+            return; // No further actions if dead
         }
 
         if (!HealthBar.Instance.isAlive)
         {
-            _agent.updatePosition = false;
+            _agent.isStopped = true; // Stop movement if the player is dead
             ActivateAnimationClip(AnimationName.Idle);
             return;
         }
-        var distance = Vector3.Distance(transform.position, _player.position);
 
+        var distance = Vector3.Distance(transform.position, _player.position);
         _agent.SetDestination(_player.position);
 
-         if (enemyType == EnemyType.Zombie2 && distance >= attackingDistance)
+        // Behavior based on type and distance
+        if (distance >= attackingDistance)
         {
-            ActivateAnimationClip(AnimationName.Run);
-            _agent.speed = runningSpeed;
+            if (enemyType == EnemyType.Zombie2)
+            {
+                ActivateAnimationClip(AnimationName.Run);
+                _agent.speed = runningSpeed;
+            }
+            else if (enemyType == EnemyType.Zombie1)
+            {
+                ActivateAnimationClip(AnimationName.Walk);
+                _agent.speed = walkingSpeed;
+            }
         }
-        else if(enemyType == EnemyType.Zombie1 && distance >= attackingDistance)
-        {
-            ActivateAnimationClip(AnimationName.Walk);
-            _agent.speed = walkingSpeed;
-        }
-         else
+        else
         {
             ActivateAnimationClip(AnimationName.Attack);
         }
-
     }
+
 }
