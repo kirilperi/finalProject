@@ -23,6 +23,10 @@ public class PlayerController : MonoBehaviour
     public bool groundCheck;
     float gravity;
     Vector3 gravityMove;
+    //shooting
+    Vector3 origin;
+    RaycastHit hit;
+    float maxDistance;
     
 
     void Start()
@@ -33,7 +37,7 @@ public class PlayerController : MonoBehaviour
         groundCheck = false;
         radiusOfGroundCheck = 0.5f;
         gravity = -9.81f;
-        
+        maxDistance = 500f;
     }
 
     // Update is called once per frame
@@ -99,5 +103,16 @@ public class PlayerController : MonoBehaviour
         cc.Move(gravityMove * Time.deltaTime);
     }
 
-   
+    void ShootingControlles()
+    {
+        if(Input.GetMouseButton(0))
+        {
+            origin = cameraTurn.GetComponent<Camera>().ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0));
+
+            if(Physics.Raycast(origin,cameraTurn.transform.forward,out hit,maxDistance))
+            {
+                hit.transform.GetComponent<MeshRenderer>().material.color = Color.red;
+            }
+        }
+    }
 }

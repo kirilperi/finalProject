@@ -7,7 +7,6 @@ public class Shop : MonoBehaviour
 {
     
     public GameObject shopInventory;
-    
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +19,6 @@ public class Shop : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            
             if(shopInventory.activeSelf)
             {
                 Cursor.lockState = CursorLockMode.Locked;
@@ -29,9 +27,9 @@ public class Shop : MonoBehaviour
             }
             else
             {
+                shopInventory.SetActive(true);
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
-                shopInventory.SetActive(true);
             }
         }
         
