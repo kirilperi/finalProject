@@ -17,7 +17,6 @@ public class HealthBar : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // Keep the object alive across scenes
         }
         else
         {
