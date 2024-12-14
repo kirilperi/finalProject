@@ -8,7 +8,8 @@ using Random = UnityEngine.Random;
 
 public enum WeaponType
 {
-    Revolver
+    Revolver,
+    shotgun
 }
 public class Weapon : MonoBehaviour
 {

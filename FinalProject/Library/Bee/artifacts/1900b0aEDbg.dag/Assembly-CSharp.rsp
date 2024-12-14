@@ -402,6 +402,7 @@
 "Assets/Scripts/ShopAndTurret/Turret.cs"
 "Assets/Scripts/UiManager.cs"
 "Assets/Scripts/Wepon.cs"
+"Assets/Scripts/WeponManager.cs"
 "Assets/Scripts/WlakingZombieEnemy.cs"
 -langversion:9.0
 /deterministic
